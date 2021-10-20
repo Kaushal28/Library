@@ -30,7 +30,6 @@ func JSONError(w http.ResponseWriter, err interface{}, code int) {
 	json.NewEncoder(w).Encode(err)
 }
 
-
 // GenerateResponse generates standard response from given error string and list of data objects
 func GenerateResponse(data []interface{}, err string) entities.Response{
     if data == nil {

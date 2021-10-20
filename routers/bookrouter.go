@@ -2,10 +2,9 @@ package routers
 
 import (
 	"context"
-	"encoding/json"
-
 	"io/ioutil"
 	"net/http"
+	"encoding/json"
 
 	"github.com/gorilla/mux"
 	"github.com/library/db"
@@ -19,7 +18,7 @@ const (
 	booksCollection = "books"
 )
 
-func viewGetHandler(client *mongo.Client) http.HandlerFunc {
+func viewHandler(client *mongo.Client) http.HandlerFunc {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		coll := client.Database(db.Database).Collection(booksCollection)
 
@@ -101,8 +100,8 @@ func saveHandler(client *mongo.Client) http.HandlerFunc {
 func BookRouter() *mux.Router {
 	database := db.New()
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/books", viewGetHandler(database)).Methods("GET")
-	router.HandleFunc("/books/{id}", viewGetHandler(database)).Methods("GET")
+	router.HandleFunc("/books", viewHandler(database)).Methods("GET")
+	router.HandleFunc("/books/{id}", viewHandler(database)).Methods("GET")
 	router.HandleFunc("/books", saveHandler(database)).Methods("POST")
 	return router
 }
