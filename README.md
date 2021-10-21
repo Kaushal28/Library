@@ -3,7 +3,7 @@ Simple library API to store and retrieve books using Go and MongoDB
 
 ## Setup
 
-To start the application, run `docker-compose up -d`
+First build a docker image using `docker build . -t library:latest` and then to start the application, run `docker-compose up -d`.
 
 ## Endpoints available
 
