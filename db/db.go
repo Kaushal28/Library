@@ -2,14 +2,12 @@ package db
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"sync"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-)
-
-const (
-	uri = "mongodb://localhost:27017"
 )
 
 // creating a thread safe singleton type for mongo client
@@ -27,7 +25,7 @@ const (
 func New() *mongo.Client {
 	if dbInstance == nil {
 		once.Do(func() {
-			client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+			client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(fmt.Sprintf("mongodb://%s:27017", os.Getenv("MONGODB_HOSTNAME"))))
 			if err != nil {
 				// end the program if connection to db is not successful
 				panic(err)

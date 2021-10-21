@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-    "github.com/library/entities"
+	"github.com/library/entities"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -31,14 +31,14 @@ func JSONError(w http.ResponseWriter, err interface{}, code int) {
 }
 
 // GenerateResponse generates standard response from given error string and list of data objects
-func GenerateResponse(data []interface{}, err string) entities.Response{
-    if data == nil {
-        data = make([]interface{}, 0)
-    }
+func GenerateResponse(data []interface{}, err string) entities.Response {
+	if data == nil {
+		data = make([]interface{}, 0)
+	}
 
-    var error entities.Error
-    if err != "" {
-        error = entities.Error{Message: err}
-    }
-    return entities.Response{Error: error, Data: data}
+	var error entities.Error
+	if err != "" {
+		error = entities.Error{Message: err}
+	}
+	return entities.Response{Error: error, Data: data}
 }

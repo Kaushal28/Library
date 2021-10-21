@@ -2,9 +2,9 @@ package routers
 
 import (
 	"context"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"encoding/json"
 
 	"github.com/gorilla/mux"
 	"github.com/library/db"
@@ -42,7 +42,7 @@ func viewHandler(client *mongo.Client) http.HandlerFunc {
 		}
 
 		var booksInterface []interface{}
-		for _, book := range(books) {
+		for _, book := range books {
 			booksInterface = append(booksInterface, book)
 		}
 
@@ -85,7 +85,7 @@ func saveHandler(client *mongo.Client) http.HandlerFunc {
 		}
 
 		var booksInterface []interface{}
-		for _, book := range(books) {
+		for _, book := range books {
 			booksInterface = append(booksInterface, book)
 		}
 
