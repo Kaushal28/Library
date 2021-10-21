@@ -15,19 +15,19 @@ First build a docker image using `docker build . -t library:latest` and then to 
 
 1. List all books:
 
-    '''
+    ```
     curl --location --request GET 'localhost:8080/books'
-    '''
+    ```
 
 2. Filter books by ID:
 
-    '''
+    ```
     curl --location --request GET 'localhost:8080/books/1'
-    '''
+    ```
 
 3. Add new book(s)
 
-    '''
+    ```
     curl --location --request POST 'localhost:8080/books' \
     --header 'Content-Type: application/json' \
     --data-raw '[
@@ -40,4 +40,4 @@ First build a docker image using `docker build . -t library:latest` and then to 
             "publisher": "Bloomsbury"
         }
     ]'
-    '''
+    ```
