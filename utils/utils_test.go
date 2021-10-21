@@ -10,7 +10,7 @@ func TestGenerateResponse(t *testing.T) {
 	response := GenerateResponse(nil, "sample_error")
 
 	if response.Data == nil {
-		t.Errorf("Got nil valued data data.")
+		t.Errorf("Got nil valued data.")
 	}
 
 	if response.Error.Message != "sample_error" {
