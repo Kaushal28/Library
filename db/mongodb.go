@@ -54,13 +54,14 @@ func NewMongoDAL() DataAccessLayer {
 	return mongo
 }
 
-// inplementing data access layer's methods on MongoDAL to satisfy DataAccessLayer interface
+// implementing data access layer's methods on MongoDAL to satisfy DataAccessLayer interface
 
 // coll is a helper method to get a collection object
 func (m *MongoDAL) coll(collection string) *mongo.Collection {
 	return m.client.Database(m.dbName).Collection(collection)
 }
 
+// Findbooks queries mongodb with given query to fetch relevant books
 func (m *MongoDAL) FindBooks(coll string, ctx context.Context, query interface{}) ([]entities.Book, error) {
 	cursor, err := m.coll(coll).Find(ctx, query)
 	if err != nil {
@@ -74,7 +75,8 @@ func (m *MongoDAL) FindBooks(coll string, ctx context.Context, query interface{}
 	return results, nil
 }
 
-func (m *MongoDAL) InsertManyBooks(coll string, ctx context.Context, documents []interface{}) (interface{}, error) {
+// InsertBooks inserts given list of books into mongodb
+func (m *MongoDAL) InsertBooks(coll string, ctx context.Context, documents []interface{}) (interface{}, error) {
 
 	_, err := m.coll(coll).InsertMany(ctx, documents)
 	if err != nil {

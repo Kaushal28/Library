@@ -41,5 +41,5 @@ func (d *dbConnector) connect(dbURI string) interface{} {
 type DataAccessLayer interface {
 	// declare all data access methods used throughout the routers
 	FindBooks(coll string, ctx context.Context, query interface{}) ([]entities.Book, error)
-	InsertManyBooks(coll string, ctx context.Context, documents []interface{}) (interface{}, error)
+	InsertBooks(coll string, ctx context.Context, documents []interface{}) (interface{}, error)
 }

@@ -67,7 +67,7 @@ func saveHandler(dal db.DataAccessLayer) http.HandlerFunc {
 			documents = append(documents, document)
 		}
 
-		_, err = dal.InsertManyBooks(booksCollection, context.Background(), documents)
+		_, err = dal.InsertBooks(booksCollection, context.Background(), documents)
 		if err != nil {
 			utils.JSONError(rw, utils.GenerateResponse(nil, err.Error()), http.StatusInternalServerError)
 			return
