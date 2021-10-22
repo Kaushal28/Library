@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/library/entities"
+	"github.com/Kaushal28/library/entities"
 )
 
 type mockDAL struct{}

@@ -1,14 +1,14 @@
-module github.com/library
+module github.com/Kaushal28/library
 
 go 1.17
 
-replace github.com/library/routers => ./routers
+replace github.com/Kaushal28/library/routers => ./routers
 
-replace github.com/library/db => ./db
+replace github.com/Kaushal28/library/db => ./db
 
-replace github.com/library/entities => ./entities
+replace github.com/Kaushal28/library/entities => ./entities
 
-replace "github.com/library/utils" => ./utils
+replace github.com/Kaushal28/library/utils => ./utils
 
 require (
 	github.com/gorilla/mux v1.8.0

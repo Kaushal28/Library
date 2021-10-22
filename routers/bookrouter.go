@@ -7,9 +7,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/library/db"
-	"github.com/library/entities"
-	"github.com/library/utils"
+	"github.com/Kaushal28/library/db"
+	"github.com/Kaushal28/library/entities"
+	"github.com/Kaushal28/library/utils"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

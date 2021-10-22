@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/library/entities"
+	"github.com/Kaushal28/library/entities"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 const (
 	Database = "library"
-	DBPort   = 27017
+	DBPort   = 27017  // this should be configurable as well
 )
 
 // newMongoDBClient creates mongodb client object
@@ -23,7 +23,6 @@ func newMongoDBClient() *mongo.Client {
 		panic("One of the required env. variable is empty: MONGODB_HOSTNAME")
 	}
 	url = fmt.Sprintf("mongodb://%s:%d", url, DBPort)
-	// url := "mongodb://localhost:27017"
 
 	// initializing db connector struct
 	connector := newDBConnector(func(dbURI string) interface{} {

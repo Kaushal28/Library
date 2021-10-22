@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/library/entities"
+	"github.com/Kaushal28/library/entities"
 )
 
 // creating a thread safe singleton type for mongo client

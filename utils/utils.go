@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/library/entities"
+	"github.com/Kaushal28/library/entities"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

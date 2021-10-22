@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/library/entities"
+	"github.com/Kaushal28/library/entities"
 )
 
 func TestGenerateResponse(t *testing.T) {
