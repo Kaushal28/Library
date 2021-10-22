@@ -33,16 +33,16 @@ func TestGenerateResponse(t *testing.T) {
 }
 
 func TestJSONError(t *testing.T) {
-    rw := httptest.NewRecorder()
+	rw := httptest.NewRecorder()
 	JSONError(rw, entities.Error{Message: "This is a test error!"}, 500)
 	res := rw.Result()
-    defer res.Body.Close()
+	defer res.Body.Close()
 
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-        t.Errorf("expected error to be nil got %v", err)
-    }
-    if strings.TrimSpace(string(data)) != "{\"message\":\"This is a test error!\"}" {
-        t.Errorf("expected error in JSON format, got %v", string(data))
-    }
+		t.Errorf("expected error to be nil got %v", err)
+	}
+	if strings.TrimSpace(string(data)) != "{\"message\":\"This is a test error!\"}" {
+		t.Errorf("expected error in JSON format, got %v", string(data))
+	}
 }

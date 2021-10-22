@@ -11,31 +11,21 @@ import (
 	"github.com/library/entities"
 	"github.com/library/utils"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 const (
 	booksCollection = "books"
 )
 
-func viewHandler(client *mongo.Client) http.HandlerFunc {
+func viewHandler(dal db.DataAccessLayer) http.HandlerFunc {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		coll := client.Database(db.Database).Collection(booksCollection)
-
 		vars := mux.Vars(r)
 		query := bson.D{{}}
 		if val, ok := vars["id"]; ok {
 			query = bson.D{{"id", val}}
 		}
 
-		cursor, err := coll.Find(context.TODO(), query)
-		if err != nil {
-			utils.JSONError(rw, utils.GenerateResponse(nil, err.Error()), http.StatusInternalServerError)
-			return
-		}
-
-		var books = make([]entities.Book, 0)
-		err = cursor.All(context.Background(), &books)
+		books, err := dal.FindBooks(booksCollection, context.Background(), query)
 		if err != nil {
 			utils.JSONError(rw, utils.GenerateResponse(nil, err.Error()), http.StatusInternalServerError)
 			return
@@ -52,7 +42,7 @@ func viewHandler(client *mongo.Client) http.HandlerFunc {
 	})
 }
 
-func saveHandler(client *mongo.Client) http.HandlerFunc {
+func saveHandler(dal db.DataAccessLayer) http.HandlerFunc {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
@@ -77,8 +67,7 @@ func saveHandler(client *mongo.Client) http.HandlerFunc {
 			documents = append(documents, document)
 		}
 
-		coll := client.Database(db.Database).Collection(booksCollection)
-		_, err = coll.InsertMany(context.TODO(), documents)
+		_, err = dal.InsertManyBooks(booksCollection, context.Background(), documents)
 		if err != nil {
 			utils.JSONError(rw, utils.GenerateResponse(nil, err.Error()), http.StatusInternalServerError)
 			return
@@ -98,7 +87,7 @@ func saveHandler(client *mongo.Client) http.HandlerFunc {
 
 // BookRouter defines handlers for book specific API endpoints
 func BookRouter() *mux.Router {
-	client := db.NewMongoDBClient()
+	client := db.NewMongoDAL()
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/books", viewHandler(client)).Methods("GET")
 	router.HandleFunc("/books/{id}", viewHandler(client)).Methods("GET")

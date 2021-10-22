@@ -9,7 +9,7 @@ func init() {
 	os.Setenv("MONGODB_HOSTNAME", "mongo")
 }
 
-type mockClient struct {}
+type mockClient struct{}
 
 func mockDBConnector(dbURI string) interface{} {
 	return &mockClient{}
