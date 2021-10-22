@@ -98,10 +98,10 @@ func saveHandler(client *mongo.Client) http.HandlerFunc {
 
 // BookRouter defines handlers for book specific API endpoints
 func BookRouter() *mux.Router {
-	database := db.New()
+	client := db.NewMongoDBClient()
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/books", viewHandler(database)).Methods("GET")
-	router.HandleFunc("/books/{id}", viewHandler(database)).Methods("GET")
-	router.HandleFunc("/books", saveHandler(database)).Methods("POST")
+	router.HandleFunc("/books", viewHandler(client)).Methods("GET")
+	router.HandleFunc("/books/{id}", viewHandler(client)).Methods("GET")
+	router.HandleFunc("/books", saveHandler(client)).Methods("POST")
 	return router
 }
